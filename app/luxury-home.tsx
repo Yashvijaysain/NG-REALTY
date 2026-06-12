@@ -308,7 +308,10 @@ export default function LuxuryHome() {
       <main>
         <section id="hero" className="hero">
           <div className="hero-media">
-            <video className="hero-video" src="/ivary.mp4" autoPlay muted loop playsInline />
+            <video className="hero-video" autoPlay muted loop playsInline preload="metadata" poster={assets.hero}>
+              <source src="/ivary.mp4" type="video/mp4" />
+              <source src="/ivary.mov" type="video/quicktime" />
+            </video>
           </div>
           <div className="hero-shade" />
           <motion.div className="hero-content" initial="hidden" animate="show" variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}>
