@@ -180,6 +180,7 @@ function MagneticCard({ children, className = "" }: { children: React.ReactNode;
 }
 
 export default function LuxuryHome() {
+  const heroVideoRef = useRef<HTMLVideoElement | null>(null);
   const [loading, setLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeProject, setActiveProject] = useState<(typeof projects)[number] | null>(null);
@@ -200,6 +201,15 @@ export default function LuxuryHome() {
   );
 
   useEffect(() => {
+    if (heroVideoRef.current) {
+      const playPromise = heroVideoRef.current.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {
+          // Autoplay may be blocked on some devices; the video remains muted and will still be ready.
+        });
+      }
+    }
+
     gsap.registerPlugin(ScrollTrigger);
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isDesktop = window.matchMedia("(min-width: 900px)").matches;
@@ -308,7 +318,16 @@ export default function LuxuryHome() {
       <main>
         <section id="hero" className="hero">
           <div className="hero-media">
-            <video className="hero-video" autoPlay muted loop playsInline preload="metadata" poster={assets.hero}>
+            <video
+              ref={heroVideoRef}
+              className="hero-video"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              poster={assets.hero}
+            >
               <source src="/ivory.mp4" type="video/mp4" />
               <source src="/ivary.mov" type="video/quicktime" />
             </video>
