@@ -630,6 +630,69 @@ h3 {
   }
 }
 
+@media (max-width: 426px) {
+  .section {
+    padding: 60px 16px 40px;
+  }
+
+  .section-heading {
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .about-page .section-heading h1,
+  .blog-page .section-heading h1 {
+    font-size: clamp(2.6rem, 8vw, 3.4rem);
+    max-width: 100%;
+  }
+
+  .section-intro {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    max-width: 100%;
+  }
+
+  .about-grid,
+  .blog-layout {
+    gap: 18px;
+  }
+
+  .glass-card {
+    padding: 20px;
+  }
+
+  .blog-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .blog-tag {
+    width: fit-content;
+  }
+
+  .section-actions {
+    justify-content: stretch;
+  }
+
+  .about-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .highlight-pill {
+    grid-template-columns: 30px 1fr;
+    padding: 18px 18px;
+  }
+
+  .list-bullet {
+    padding-left: 16px;
+  }
+
+  .about-values {
+    grid-template-columns: 1fr;
+  }
+}
+
 .about-copy-wrap {
   display: grid;
   gap: clamp(24px, 3vw, 40px);
