@@ -187,6 +187,7 @@ export default function LuxuryHome() {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [testimonial, setTestimonial] = useState(0);
   const [selectedRegion, setSelectedRegion] = useState<Region>("Noida");
+  const [showVideoPlayPrompt, setShowVideoPlayPrompt] = useState(false);
   const filteredProjects = projects.filter((project) => project.region === selectedRegion);
   const schema = useMemo(
     () => ({
@@ -200,13 +201,22 @@ export default function LuxuryHome() {
     [],
   );
 
+  const handleHeroVideoPlay = () => {
+    if (!heroVideoRef.current) return;
+    heroVideoRef.current.muted = true;
+    heroVideoRef.current
+      .play()
+      .then(() => setShowVideoPlayPrompt(false))
+      .catch(() => setShowVideoPlayPrompt(true));
+  };
+
   useEffect(() => {
     if (heroVideoRef.current) {
       heroVideoRef.current.muted = true;
       const playPromise = heroVideoRef.current.play();
       if (playPromise && typeof playPromise.catch === "function") {
         playPromise.catch(() => {
-          // Autoplay may be blocked on some devices; the video remains muted and will still be ready.
+          setShowVideoPlayPrompt(true);
         });
       }
     }
@@ -333,14 +343,23 @@ export default function LuxuryHome() {
                 if (heroVideoRef.current) {
                   heroVideoRef.current.muted = true;
                   heroVideoRef.current.play().catch(() => {
-                    // If autoplay is blocked initially, keep the muted video ready.
+                    setShowVideoPlayPrompt(true);
                   });
                 }
               }}
+              onPlay={() => setShowVideoPlayPrompt(false)}
+              onPause={() => setShowVideoPlayPrompt(true)}
             >
               <source src="/ivory.mp4" type="video/mp4" />
               <source src="/ivary.mov" type="video/quicktime" />
             </video>
+            {showVideoPlayPrompt && (
+              <div className="hero-play-overlay">
+                <button className="hero-play-button" type="button" onClick={handleHeroVideoPlay}>
+                  ▶
+                </button>
+              </div>
+            )}
           </div>
           <div className="hero-shade" />
           <motion.div className="hero-content" initial="hidden" animate="show" variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}>

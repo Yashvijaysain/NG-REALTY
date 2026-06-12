@@ -267,6 +267,36 @@ img {
   display: block;
 }
 
+.hero-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.hero-play-button {
+  pointer-events: auto;
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(0, 0, 0, 0.55);
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.hero-play-button:hover,
+.hero-play-button:focus-visible {
+  transform: scale(1.05);
+  background: rgba(0, 0, 0, 0.72);
+}
+
 .hero-shade {
   z-index: 1;
   background: transparent;
