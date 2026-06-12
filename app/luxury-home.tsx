@@ -202,6 +202,7 @@ export default function LuxuryHome() {
 
   useEffect(() => {
     if (heroVideoRef.current) {
+      heroVideoRef.current.muted = true;
       const playPromise = heroVideoRef.current.play();
       if (playPromise && typeof playPromise.catch === "function") {
         playPromise.catch(() => {
@@ -321,12 +322,21 @@ export default function LuxuryHome() {
             <video
               ref={heroVideoRef}
               className="hero-video"
-              autoPlay
-              muted
-              loop
-              playsInline
+              autoPlay={true}
+              muted={true}
+              loop={true}
+              playsInline={true}
+              webkitPlaysInline={true}
               preload="auto"
               poster={assets.hero}
+              onLoadedData={() => {
+                if (heroVideoRef.current) {
+                  heroVideoRef.current.muted = true;
+                  heroVideoRef.current.play().catch(() => {
+                    // If autoplay is blocked initially, keep the muted video ready.
+                  });
+                }
+              }}
             >
               <source src="/ivory.mp4" type="video/mp4" />
               <source src="/ivary.mov" type="video/quicktime" />
