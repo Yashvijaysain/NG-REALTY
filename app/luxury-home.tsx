@@ -328,12 +328,12 @@ export default function LuxuryHome() {
 
         <section className="section logo-marquee" aria-label="Partner logos">
           <div className="marquee-track" aria-hidden="true">
-            {Array.from({ length: 7 }, (_, index) => (
+            {Array.from({ length: 9 }, (_, index) => (
               <div className="logo-cell" key={`logo-${index}`}>
                 <Image src={`/countyplogo/${index + 1}.png`} alt={`Partner logo ${index + 1}`} fill sizes="120px" />
               </div>
             ))}
-            {Array.from({ length: 7 }, (_, index) => (
+            {Array.from({ length: 9 }, (_, index) => (
               <div className="logo-cell" key={`logo-dup-${index}`}>
                 <Image src={`/countyplogo/${index + 1}.png`} alt={`Partner logo ${index + 1}`} fill sizes="120px" />
               </div>
