@@ -1235,13 +1235,22 @@ footer a {
     font-size: clamp(3rem, 14vw, 4.2rem);
   }
 
+  .hero-actions {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 24px;
+    justify-content: center;
+    padding: 0 4px;
+  }
+
   .hero-actions .button {
     width: 100%;
   }
 
   .stat-dock {
     right: 18px;
-    bottom: 24px;
+    bottom: 110px;
     left: 18px;
     grid-template-columns: 1fr 1fr;
   }
