@@ -309,7 +309,7 @@ export default function LuxuryHome() {
         <section id="hero" className="hero">
           <div className="hero-media">
             <video className="hero-video" autoPlay muted loop playsInline preload="metadata" poster={assets.hero}>
-              <source src="/ivary.mp4" type="video/mp4" />
+              <source src="/ivory.mp4" type="video/mp4" />
               <source src="/ivary.mov" type="video/quicktime" />
             </video>
           </div>
