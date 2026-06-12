@@ -195,6 +195,12 @@ img {
   background: rgba(246, 241, 232, 0.08);
 }
 
+.button.read-more {
+  color: var(--ink);
+  background: var(--gold);
+  border-color: transparent;
+}
+
 .menu-button {
   display: none;
   width: 46px;
@@ -496,8 +502,132 @@ h3 {
 
 .section-heading {
   display: grid;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.about-page .section-heading,
+.blog-page .section-heading {
+  gap: 10px;
+}
+
+.about-page .section-heading h1,
+.blog-page .section-heading h1 {
+  color: var(--ink);
+  font-size: clamp(3.6rem, 5vw, 5.4rem);
+  line-height: 1.02;
+  max-width: 18ch;
+}
+
+.blog-page .section-heading {
+  margin-bottom: 20px;
+}
+
+.section-intro {
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 1.03rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.section-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 16px;
-  margin-bottom: 34px;
+  margin-top: 42px;
+}
+
+.about-page .section-heading,
+.blog-page .section-heading,
+.about-page .about-grid,
+.blog-page .blog-layout {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.about-grid,
+.blog-layout {
+  display: grid;
+  gap: 24px;
+}
+
+.about-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+.blog-layout {
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: start;
+}
+
+.blog-list {
+  display: grid;
+  gap: 24px;
+}
+
+.blog-card {
+  display: grid;
+  gap: 18px;
+  width: 100%;
+}
+
+.page-heading {
+  max-width: 1160px;
+  margin: 0 auto 18px;
+}
+
+.blog-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.blog-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink);
+  background: rgba(246, 241, 232, 0.82);
+}
+
+.blog-card-actions {
+  margin-top: 8px;
+}
+
+.blog-sidebar {
+  display: grid;
+  gap: 20px;
+}
+
+.sidebar-section {
+  display: grid;
+  gap: 10px;
+}
+
+.list-bullet {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.list-bullet li {
+  line-height: 1.75;
+}
+
+@media (max-width: 900px) {
+  .about-grid,
+  .blog-layout {
+    grid-template-columns: 1fr;
+  }
 }
 
 .about-copy-wrap {
@@ -1014,7 +1144,7 @@ footer {
 }
 
 footer img {
-  width: 140px;
+  width: 110px;
   height: auto;
   object-fit: contain;
 }

@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Lenis from "lenis";
@@ -38,7 +39,7 @@ const assets = {
   yoga: "/optimized/yoga.webp",
 };
 
-const navItems = ["About", "Projects", "Categories", "Gallery", "Invest", "Contact"];
+const navItems = ["About", "Blog", "Projects", "Categories", "Gallery", "Invest", "Contact"];
 
 const stats = [
   { value: 50, suffix: "+", label: "Projects Delivered" },
@@ -213,6 +214,7 @@ export default function LuxuryHome() {
   useEffect(() => {
     if (heroVideoRef.current) {
       heroVideoRef.current.muted = true;
+      heroVideoRef.current.setAttribute("webkit-playsinline", "true");
       const playPromise = heroVideoRef.current.play();
       if (playPromise && typeof playPromise.catch === "function") {
         playPromise.catch(() => {
@@ -293,15 +295,18 @@ export default function LuxuryHome() {
       <div className="scroll-progress" aria-hidden />
 
       <header className="site-nav">
-        <a href="#hero" className="brand" aria-label="NEXT GEN REALTY DEVELOPERS home">
+        <Link href="#hero" className="brand" aria-label="NEXT GEN REALTY DEVELOPERS home">
           <Image src={assets.logo} alt="" width={132} height={54} priority />
-        </a>
+        </Link>
         <nav className="desktop-nav" aria-label="Primary navigation">
-          {navItems.map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`}>
-              {item}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const href = item === "About" ? "/about" : item === "Blog" ? "/blog" : `#${item.toLowerCase()}`;
+            return (
+              <Link key={item} href={href}>
+                {item}
+              </Link>
+            );
+          })}
         </nav>
         <a href="#contact" className="nav-cta">
           Enquire <ArrowRight size={16} />
@@ -317,11 +322,14 @@ export default function LuxuryHome() {
             <button onClick={() => setMenuOpen(false)} aria-label="Close menu">
               <X />
             </button>
-            {navItems.map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)}>
-                {item}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const href = item === "About" ? "/about" : item === "Blog" ? "/blog" : `#${item.toLowerCase()}`;
+              return (
+                <Link key={item} href={href} onClick={() => setMenuOpen(false)}>
+                  {item}
+                </Link>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>
@@ -336,7 +344,6 @@ export default function LuxuryHome() {
               muted={true}
               loop={true}
               playsInline={true}
-              webkitPlaysInline={true}
               preload="auto"
               poster={assets.hero}
               onLoadedData={() => {
@@ -402,6 +409,11 @@ export default function LuxuryHome() {
                 sellers find the best buyers. We guide clients through property selection, negotiation, and closing for our
                 featured opportunities in Noida and Gurugram.
               </p>
+              <div style={{ marginTop: "14px" }}>
+                <Link href="/about" className="button secondary read-more">
+                  Read More
+                </Link>
+              </div>
             </div>
 
             <div className="about-highlights" data-reveal>
@@ -621,7 +633,7 @@ export default function LuxuryHome() {
 
       <footer>
         <div>
-          <Image src={assets.logo} alt="NEXT GEN REALTY DEVELOPERS" width={150} height={60} />
+          <Image src="/26.png" alt="NEXT GEN REALTY DEVELOPERS" width={150} height={60} />
           <p>Luxury Residences • Commercial Spaces • Smart Developments</p>
         </div>
         <div>
