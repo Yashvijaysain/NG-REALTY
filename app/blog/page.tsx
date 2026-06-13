@@ -1,79 +1,109 @@
 import Link from "next/link";
 
-const articles = [
+const featuredArticle = {
+  title: "BPTP to invest ₹1,200 crore to develop a residential project in Gurugram",
+  tag: "Must Read",
+  preview:
+    "BPTP, a leading real estate developer, has announced plans to invest ₹1,200 crore in developing a premium residential project in Gurugram. The project will feature state-of-the-art amenities and is expected to set new standards for luxury living in the region.",
+  author: "Source –  ET Realty",
+  role: "Marketing Consultant",
+  date: "26 May 2026",
+  image: "/27.png",
+};
+
+const featuredArticles = [
   {
-    title: "Market Pulse: Noida Luxury Demand",
-    date: "June 2026",
-    preview: "Discover the latest trends shaping premium residential demand in Noida and what investors should watch next.",
-    tag: "Market Trends",
-  },
-  {
-    title: "Why Smart Homes Matter in Gurugram",
+    title: "How curated amenities shape premium communities",
+    preview: "An inside look at the amenities buyers now expect from luxury residential developments.",
+    tag: "Lifestyle",
     date: "May 2026",
-    preview: "Smart home features are now a core part of buyer expectations in luxury real estate. Learn how we package them.",
-    tag: "Smart Living",
   },
   {
-    title: "Designing the Perfect Community",
+    title: "Understanding premium market demand in Noida",
+    preview: "What high-net-worth buyers are looking for, and how developers can respond with confidence.",
+    tag: "Market Trends",
     date: "April 2026",
-    preview: "From landscaped courtyards to wellness amenities, a successful luxury community blends comfort with connection.",
-    tag: "Community Design",
+  },
+  {
+    title: "Design systems for future-ready real estate",
+    preview: "How thoughtful design systems help create experiences that last across years and ownership cycles.",
+    tag: "Design",
+    date: "March 2026",
+  },
+  {
+    title: "How curated amenities shape premium communities",
+    preview: "An inside look at the amenities buyers now expect from luxury residential developments.",
+    tag: "Lifestyle",
+    date: "May 2026",
+  },
+  {
+    title: "Understanding premium market demand in Noida",
+    preview: "What high-net-worth buyers are looking for, and how developers can respond with confidence.",
+    tag: "Market Trends",
+    date: "April 2026",
+  },
+  {
+    title: "Design systems for future-ready real estate",
+    preview: "How thoughtful design systems help create experiences that last across years and ownership cycles.",
+    tag: "Design",
+    date: "March 2026",
   },
 ];
 
 export default function BlogPage() {
   return (
     <main className="section blog-page" style={{ padding: "120px 24px 80px" }}>
-      <div className="section-heading">
-        <p className="eyebrow dark">News & Articles</p>
-        <h1>Latest Insights from NEXT GEN REALTY DEVELOPERS</h1>
-        <p className="section-intro">
-          Explore market outlook, smart living trends, and design perspectives that shape premium residential and commercial development in Delhi NCR.
-        </p>
+      <div className="blog-logo-wrap">
+        <img src="/NGLOGO.png" alt="NG Logo" className="blog-logo" />
       </div>
 
-      <div className="blog-layout">
-        <div className="blog-list">
-          {articles.map((article) => (
-            <article key={article.title} className="glass-card blog-card">
-              <div className="blog-card-header">
-                <span className="eyebrow dark">{article.date}</span>
-                <span className="blog-tag">{article.tag}</span>
-              </div>
-              <h2>{article.title}</h2>
-              <p>{article.preview}</p>
-              <div className="blog-card-actions">
-                <Link href="/about" className="button secondary">
-                  Read More
-                </Link>
-              </div>
-            </article>
-          ))}
+      <div className="blog-hero-heading">
+        <div>
+          <p className="eyebrow dark">News & Articles</p>
+          <h1>Discover insights, trends, and inspiration.</h1>
         </div>
-
-        <aside className="glass-card blog-sidebar">
-          <h3>Stay Informed</h3>
-          <p>
-            Follow our latest commentary for expert insight into luxury real estate demand, buyer behavior, and premium placemaking in Noida and Gurugram.
-          </p>
-          <div className="sidebar-section">
-            <strong>Topics</strong>
-            <ul className="list-bullet">
-              <li>Luxury market updates</li>
-              <li>Smart home experiences</li>
-              <li>Design & community strategy</li>
-            </ul>
-          </div>
-          <Link href="/about" className="button primary">
-            Meet Our Team
-          </Link>
-        </aside>
+        <Link href="/blog" className="button secondary blog-view-all">
+          View all
+        </Link>
       </div>
 
-      <div className="section-actions">
-        <Link href="/" className="button secondary">
-          Back to Home
-        </Link>
+      <section className="blog-hero">
+        <div className="blog-hero-image">
+          <img src={featuredArticle.image} alt={featuredArticle.title} />
+        </div>
+        <div className="blog-hero-copy">
+          <span className="blog-chip">{featuredArticle.tag}</span>
+          <h2>{featuredArticle.title}</h2>
+          <p>{featuredArticle.preview}</p>
+          <div className="blog-hero-meta">
+            <div className="author-card">
+              <div className="author-avatar">E</div>
+              <div>
+                <strong>{featuredArticle.author}</strong>
+                <p>{featuredArticle.role}</p>
+              </div>
+            </div>
+            <span className="blog-tag">{featuredArticle.date}</span>
+          </div>
+        </div>
+      </section>
+
+      <div className="blog-teaser-grid">
+        {featuredArticles.map((article) => (
+          <article key={article.title} className="glass-card teaser-card">
+            <div className="teaser-meta">
+              <span className="eyebrow dark">{article.date}</span>
+              <span className="blog-tag">{article.tag}</span>
+            </div>
+            <h3>{article.title}</h3>
+            <p>{article.preview}</p>
+            <div className="teaser-footer">
+              <Link href="/blog" className="button secondary small">
+                Read More
+              </Link>
+            </div>
+          </article>
+        ))}
       </div>
     </main>
   );
