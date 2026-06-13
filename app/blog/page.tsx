@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const featuredArticle = {
@@ -54,7 +55,13 @@ export default function BlogPage() {
 
       <section className="blog-hero">
         <div className="blog-hero-image">
-          <img src={featuredArticle.image} alt={featuredArticle.title} />
+          <Image
+            src={featuredArticle.image}
+            alt={featuredArticle.title}
+            fill
+            sizes="(max-width: 900px) 100vw, 50vw"
+            className="blog-hero-img"
+          />
         </div>
         <div className="blog-hero-copy">
           <span className="blog-chip">{featuredArticle.tag}</span>

@@ -723,17 +723,15 @@ h3 {
 }
 
 .blog-hero-image {
+  position: relative;
   border-radius: 28px;
   overflow: hidden;
   min-height: 460px;
   background: rgba(11, 17, 20, 0.04);
 }
 
-.blog-hero-image img {
-  width: 100%;
-  height: 100%;
+.blog-hero-img {
   object-fit: cover;
-  display: block;
 }
 
 .blog-hero-copy {
