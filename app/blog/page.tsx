@@ -52,7 +52,7 @@ const featuredArticles = [
 
 export default function BlogPage() {
   return (
-    <main className="section blog-page" style={{ padding: "120px 24px 80px" }}>
+    <main className="section blog-page" style={{ padding: "60px 24px 80px" }}>
       <div className="blog-logo-wrap">
         <img src="/NGLOGO.png" alt="NG Logo" className="blog-logo" />
       </div>
