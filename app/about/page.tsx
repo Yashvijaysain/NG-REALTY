@@ -23,7 +23,11 @@ const serviceList = [
 export default function AboutPage() {
   return (
     <main className="section about-page" style={{ padding: "90px 24px 80px" }}>
-      <div className="section-heading">
+      <div className="about-logo-wrap">
+        <img src="/NGLOGO.png" alt="NG Logo" className="about-logo" />
+      </div>
+
+      <div className="section-heading about-heading-center">
         <p className="eyebrow dark">About Us</p>
         <h1>About NEXT GEN REALTY DEVELOPERS</h1>
         <p className="section-intro">
