@@ -5,7 +5,7 @@ const featuredArticle = {
   tag: "Must Read",
   preview:
     "BPTP, a leading real estate developer, has announced plans to invest ₹1,200 crore in developing a premium residential project in Gurugram. The project will feature state-of-the-art amenities and is expected to set new standards for luxury living in the region.",
-  author: "Source –  ET Realty",
+  author: "ET Realty",
   role: "Marketing Consultant",
   date: "26 May 2026",
   image: "/27.png",
@@ -13,36 +13,21 @@ const featuredArticle = {
 
 const featuredArticles = [
   {
+    slug: "boutique-architecture-luxury-living",
     title: "How curated amenities shape premium communities",
     preview: "An inside look at the amenities buyers now expect from luxury residential developments.",
     tag: "Lifestyle",
     date: "May 2026",
   },
   {
+    slug: "noida-premium-market-demand",
     title: "Understanding premium market demand in Noida",
     preview: "What high-net-worth buyers are looking for, and how developers can respond with confidence.",
     tag: "Market Trends",
     date: "April 2026",
   },
   {
-    title: "Design systems for future-ready real estate",
-    preview: "How thoughtful design systems help create experiences that last across years and ownership cycles.",
-    tag: "Design",
-    date: "March 2026",
-  },
-  {
-    title: "How curated amenities shape premium communities",
-    preview: "An inside look at the amenities buyers now expect from luxury residential developments.",
-    tag: "Lifestyle",
-    date: "May 2026",
-  },
-  {
-    title: "Understanding premium market demand in Noida",
-    preview: "What high-net-worth buyers are looking for, and how developers can respond with confidence.",
-    tag: "Market Trends",
-    date: "April 2026",
-  },
-  {
+    slug: "design-systems-for-future-ready-real-estate",
     title: "Design systems for future-ready real estate",
     preview: "How thoughtful design systems help create experiences that last across years and ownership cycles.",
     tag: "Design",
@@ -90,7 +75,7 @@ export default function BlogPage() {
 
       <div className="blog-teaser-grid">
         {featuredArticles.map((article) => (
-          <article key={article.title} className="glass-card teaser-card">
+          <article key={article.slug} className="glass-card teaser-card">
             <div className="teaser-meta">
               <span className="eyebrow dark">{article.date}</span>
               <span className="blog-tag">{article.tag}</span>
@@ -98,7 +83,7 @@ export default function BlogPage() {
             <h3>{article.title}</h3>
             <p>{article.preview}</p>
             <div className="teaser-footer">
-              <Link href="/blog" className="button secondary small">
+              <Link href={`/blog/${article.slug}`} className="button secondary small">
                 Read More
               </Link>
             </div>

@@ -190,9 +190,13 @@ img {
 }
 
 .button.secondary {
-  color: var(--paper);
-  border: 1px solid rgba(246, 241, 232, 0.36);
-  background: rgba(246, 241, 232, 0.08);
+  color: var(--ink);
+  border: 1px solid rgba(11, 17, 20, 0.12);
+  background: rgba(246, 241, 232, 0.92);
+}
+
+.button.secondary:hover {
+  background: rgba(11, 17, 20, 0.08);
 }
 
 .button.read-more {
@@ -556,6 +560,74 @@ h3 {
 .about-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: start;
+}
+
+.about-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.2fr) minmax(280px, 0.8fr);
+  gap: 24px;
+}
+
+.about-hero-copy {
+  display: grid;
+  gap: 22px;
+  padding: 34px;
+  border-radius: 26px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.about-hero-copy h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  color: var(--ink);
+}
+
+.about-hero-copy p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.about-image-placeholder {
+  min-height: 420px;
+  background: linear-gradient(180deg, rgba(246,241,232,0.9) 0%, rgba(226,217,200,0.95) 100%);
+  border-radius: 26px;
+  box-shadow: 0 24px 60px rgba(11, 17, 20, 0.08);
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.about-stats div {
+  display: grid;
+  gap: 8px;
+  padding: 20px;
+  border-radius: 18px;
+  background: rgba(11, 17, 20, 0.04);
+  border: 1px solid rgba(11, 17, 20, 0.08);
+}
+
+.about-stats strong {
+  font-size: 1.6rem;
+  color: var(--ink);
+}
+
+.about-stats span {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.about-feature-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.about-value-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .blog-layout {

@@ -22,7 +22,7 @@ const serviceList = [
 
 export default function AboutPage() {
   return (
-    <main className="section about-page" style={{ padding: "120px 24px 80px" }}>
+    <main className="section about-page" style={{ padding: "90px 24px 80px" }}>
       <div className="section-heading">
         <p className="eyebrow dark">About Us</p>
         <h1>About NEXT GEN REALTY DEVELOPERS</h1>
@@ -32,39 +32,51 @@ export default function AboutPage() {
         </p>
       </div>
 
-      <div className="about-grid">
-        <section className="glass-card">
-          <h2>Who We Are</h2>
+      <div className="about-hero-grid">
+        <section className="glass-card about-hero-copy">
+          <h2>Creating curated luxury experiences</h2>
           <p>
-            NEXT GEN REALTY DEVELOPERS provides boutique advisory for premium residential and commercial clients in Noida and Gurugram.
-            We combine research, planning, and execution support to help each project feel thoughtfully designed, valued, and future-ready.
+            We bring together site intelligence, bespoke design, and investment insight to shape destinations that feel exceptional to live in and strong to handover.
           </p>
+          <div className="about-stats">
+            <div>
+              <strong>30+</strong>
+              <span>Projects advised</span>
+            </div>
+            <div>
+              <strong>10M+</strong>
+              <span>Sq. ft. considered</span>
+            </div>
+            <div>
+              <strong>100%</strong>
+              <span>Client satisfaction focus</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="glass-card about-hero-image">
+          <div className="about-image-placeholder"></div>
+        </section>
+      </div>
+
+      <div className="about-grid about-feature-grid">
+        <section className="glass-card">
+          <h3>Our Mission</h3>
+          <p>To create curated real estate experiences that feel effortless to live in, invest in, and grow with over time.</p>
         </section>
 
         <section className="glass-card">
-          <h2>How We Work</h2>
+          <h3>What We Do</h3>
           <ul className="list-bullet">
             {serviceList.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
         </section>
+      </div>
 
-        <aside className="glass-card">
-          <h3>Our Mission</h3>
-          <p>
-            To create curated real estate experiences that feel effortless to live in, invest in, and grow with over time.
-          </p>
-        </aside>
-
-        <aside className="glass-card">
-          <h3>Why Choose Us</h3>
-          <p>
-            We deliver service that is local, transparent and driven by premium design principles — from property sourcing through to delivery and handover.
-          </p>
-        </aside>
-
-        <section className="glass-card highlight-group">
+      <div className="about-grid about-value-grid">
+        <section className="glass-card value-card">
           <h3>Highlights</h3>
           <div className="about-highlights">
             {aboutHighlights.map((highlight) => (
@@ -76,7 +88,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="glass-card">
+        <section className="glass-card value-card">
           <h3>Core Values</h3>
           <ul className="list-bullet">
             {coreValues.map((value) => (
@@ -91,7 +103,7 @@ export default function AboutPage() {
           Back to Home
         </Link>
         <Link href="/blog" className="button primary">
-          Read Our Insights
+          Explore Articles
         </Link>
       </div>
     </main>
