@@ -1,7 +1,9 @@
-﻿"use client";
+"use client";
 
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Lenis from "lenis";
@@ -15,6 +17,7 @@ import {
   ChevronRight,
   Gem,
   Home,
+  Key,
   Landmark,
   Mail,
   MapPin,
@@ -23,7 +26,9 @@ import {
   ShieldCheck,
   Sparkles,
   Star,
+  Tag,
   Trees,
+  UserCheck,
   X,
   Zap,
 } from "lucide-react";
@@ -39,7 +44,7 @@ const assets = {
   yoga: "/optimized/yoga.webp",
 };
 
-const navItems = ["About", "Blog", "Projects", "Categories", "Gallery", "Invest", "Contact"];
+const navItems = ["About", "Blog", "Projects", "Categories", "Contact"];
 
 const stats = [
   { value: 50, suffix: "+", label: "Projects Delivered" },
@@ -182,6 +187,7 @@ function MagneticCard({ children, className = "" }: { children: React.ReactNode;
 
 export default function LuxuryHome() {
   const heroVideoRef = useRef<HTMLVideoElement | null>(null);
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeProject, setActiveProject] = useState<(typeof projects)[number] | null>(null);
@@ -189,6 +195,17 @@ export default function LuxuryHome() {
   const [testimonial, setTestimonial] = useState(0);
   const [selectedRegion, setSelectedRegion] = useState<Region>("Noida");
   const [showVideoPlayPrompt, setShowVideoPlayPrompt] = useState(false);
+  const [serviceModalOpen, setServiceModalOpen] = useState(false);
+  const [serviceStep, setServiceStep] = useState<1 | 2>(1);
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+
+  const openServiceModal = () => {
+    setServiceModalOpen(true);
+    setServiceStep(1);
+    setSelectedService(null);
+    setSelectedLocation(null);
+  };
   const filteredProjects = projects.filter((project) => project.region === selectedRegion);
   const schema = useMemo(
     () => ({
@@ -308,6 +325,9 @@ export default function LuxuryHome() {
             );
           })}
         </nav>
+        <button className="services-nav-btn" onClick={openServiceModal}>
+          Services
+        </button>
         <a href="#contact" className="nav-cta">
           Enquire <ArrowRight size={16} />
         </a>
@@ -322,6 +342,12 @@ export default function LuxuryHome() {
             <button onClick={() => setMenuOpen(false)} aria-label="Close menu">
               <X />
             </button>
+            <button
+              className="services-mobile-btn"
+              onClick={() => { setMenuOpen(false); openServiceModal(); }}
+            >
+              Services
+            </button>
             {navItems.map((item) => {
               const href = item === "About" ? "/about" : item === "Blog" ? "/blog" : `#${item.toLowerCase()}`;
               return (
@@ -330,6 +356,124 @@ export default function LuxuryHome() {
                 </Link>
               );
             })}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Services Modal ── */}
+      <AnimatePresence>
+        {serviceModalOpen && (
+          <motion.div
+            className="services-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setServiceModalOpen(false)}
+          >
+            <motion.div
+              className="services-modal"
+              initial={{ y: 48, scale: 0.95 }}
+              animate={{ y: 0, scale: 1 }}
+              exit={{ y: 48, scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 280, damping: 26 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className="close" onClick={() => setServiceModalOpen(false)} aria-label="Close services modal">
+                <X />
+              </button>
+
+              <AnimatePresence mode="wait">
+                {serviceStep === 1 ? (
+                  <motion.div
+                    key="step1"
+                    className="modal-step"
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -24 }}
+                    transition={{ duration: 0.22 }}
+                  >
+                    <p className="modal-step-label">
+                      <span className="step-dot active" /> Step 1
+                      &nbsp;&nbsp;
+                      <span className="step-dot" /> Step 2
+                    </p>
+                    <h2 className="modal-title">What are you looking for?</h2>
+                    <div className="service-options">
+                      {([
+                        { key: "BUY",   icon: <Home size={26} /> },
+                        { key: "RENT",  icon: <Key size={26} /> },
+                        { key: "SELL",  icon: <Tag size={26} /> },
+                        { key: "AGENT", icon: <UserCheck size={26} /> },
+                      ] as { key: string; icon: React.ReactNode }[]).map(({ key, icon }) => (
+                        <button
+                          key={key}
+                          className={`service-option${selectedService === key ? " selected" : ""}`}
+                          onClick={() => setSelectedService(key)}
+                        >
+                          {icon}
+                          <span>{key}</span>
+                        </button>
+                      ))}
+                    </div>
+                    <button
+                      className="modal-next-btn"
+                      disabled={!selectedService}
+                      onClick={() => setServiceStep(2)}
+                    >
+                      Next <ArrowRight size={15} />
+                    </button>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="step2"
+                    className="modal-step"
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -24 }}
+                    transition={{ duration: 0.22 }}
+                  >
+                    <p className="modal-step-label">
+                      <span className="step-dot done" /> Step 1
+                      &nbsp;&nbsp;
+                      <span className="step-dot active" /> Step 2
+                    </p>
+                    <h2 className="modal-title">Choose your location</h2>
+                    <div className="location-options">
+                      {["Gurugram", "Noida"].map((loc) => (
+                        <button
+                          key={loc}
+                          className={`location-option${selectedLocation === loc ? " selected" : ""}`}
+                          onClick={() => setSelectedLocation(loc)}
+                        >
+                          <MapPin size={19} />
+                          <span>{loc}</span>
+                        </button>
+                      ))}
+                    </div>
+                    <div className="modal-footer-row">
+                      <button className="modal-back-btn" onClick={() => setServiceStep(1)}>
+                        Back
+                      </button>
+                      <button
+                        className="modal-submit-btn"
+                        disabled={!selectedLocation}
+                        onClick={() => {
+                          setServiceModalOpen(false);
+                          const svc = (selectedService ?? "").toLowerCase();
+                          if (svc === "buy") {
+                            router.push(`/services/buy?location=${selectedLocation}`);
+                          } else {
+                            router.push(`/services/${svc}`);
+                          }
+                        }}
+                      >
+                        Find Properties <ArrowRight size={15} />
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -477,6 +621,11 @@ export default function LuxuryHome() {
               </MagneticCard>
             ))}
           </div>
+          <div className="view-all-projects-wrap" data-reveal>
+            <Link href="/projects" className="view-all-btn">
+              View All Projects <ArrowRight size={17} />
+            </Link>
+          </div>
         </section>
 
         <section id="categories" className="section categories">
@@ -495,28 +644,6 @@ export default function LuxuryHome() {
           </div>
         </section>
 
-        <section id="gallery" className="section gallery-section">
-          <div className="section-heading" data-reveal>
-            <p className="eyebrow dark">Project Gallery</p>
-            <h2>Properties across Noida and Gurugram.</h2>
-          </div>
-          <div className="masonry">
-            {gallery.map((item, index) => (
-              <button
-                className={item.tall ? "tall" : ""}
-                key={`${item.project}-${item.image}-${index}`}
-                onClick={() => setLightbox(item.image)}
-                data-reveal
-              >
-                <Image src={item.image} alt={`${item.project} project gallery`} fill sizes="(max-width: 800px) 100vw, 33vw" />
-                <span>
-                  {item.project}
-                  <small>{item.region}</small>
-                </span>
-              </button>
-            ))}
-          </div>
-        </section>
 
         <section className="section why">
           <div className="section-heading" data-reveal>
@@ -553,41 +680,6 @@ export default function LuxuryHome() {
                 <ChevronRight />
               </button>
             </div>
-          </div>
-        </section>
-
-        <section id="invest" className="section investment">
-          <div className="section-copy" data-reveal>
-            <p className="eyebrow dark">Investment Opportunities</p>
-            <h2>Designed for lifestyle today and disciplined returns tomorrow.</h2>
-            <p>Our Noida and Gurugram portfolio is shaped around strong connectivity, premium residential demand, and long-term end-user value.</p>
-          </div>
-          <div className="investment-grid">
-            {[
-              ["xx-xx%", "Target appreciation corridor"],
-              ["xx%", "Projected rental yield"],
-              ["2x", "Growth node infrastructure"],
-            ].map(([value, label]) => (
-              <MagneticCard className="investment-card" key={label}>
-                <strong>{value}</strong>
-                <span>{label}</span>
-              </MagneticCard>
-            ))}
-          </div>
-        </section>
-
-        <section className="section awards">
-          <div data-reveal>
-            <p className="eyebrow dark">Awards & Recognition</p>
-            <h2>Recognized for delivery, design quality, and community impact.</h2>
-          </div>
-          <div className="award-row">
-            {['Luxury Habitat Award', 'Smart Township Citation', 'Green Planning Merit', 'Customer Trust Badge'].map((award) => (
-              <div className="award-badge" key={award}>
-                <Award />
-                <span>{award}</span>
-              </div>
-            ))}
           </div>
         </section>
 

@@ -521,6 +521,7 @@ export default function AboutPage() {
                   sizes="(max-width: 768px) 30vw, 20vw"
                   className="object-cover"
                 />
+                
               </div>
             </div>
 
