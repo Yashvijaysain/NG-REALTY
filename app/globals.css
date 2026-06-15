@@ -2203,9 +2203,10 @@ footer a {
 
 .buy-prop-list {
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 14px;
+  align-content: start;
   padding: 20px 16px 40px;
   border-right: 1px solid var(--line);
   scrollbar-width: thin;
@@ -2221,7 +2222,6 @@ footer a {
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
   text-decoration: none;
   color: var(--ink);
-  flex-shrink: 0;
 }
 .buy-prop-card:hover {
   transform: translateY(-4px);
@@ -2550,6 +2550,7 @@ footer a {
     border-bottom: 1px solid var(--line);
     max-height: 55svh;
     overflow-y: auto;
+    grid-template-columns: 1fr;
   }
   .buy-map-panel {
     height: 50svh;

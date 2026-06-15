@@ -741,8 +741,8 @@ export default function LuxuryHome() {
             <button aria-label="Subscribe"><ArrowRight /></button>
           </div>
           <div className="socials">
-            <a href="#" aria-label="Instagram">IG</a>
-            <a href="#" aria-label="LinkedIn">IN</a>
+            <a href="https://www.instagram.com/next_gen_realty/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">IN</a>
             <a href="#" aria-label="YouTube">YT</a>
           </div>
         </div>
