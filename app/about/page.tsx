@@ -22,30 +22,32 @@ export default function AboutPage() {
 
   const teamMembers = [
     {
-      name: "Arpit Gahlot",
-      role: "Founder",
-      image: "/ag.png",
+      name: "R.C. Bhardwaj",
+      role: "Chairman ",
+      image: "/rcb.png",
+      bio: "Ensuring exceptional buyer service and seamless property handovers."
+    },
+
+    {
+      name: "Kushal Bhardwaj",
+      role: "Director",
+      image: "/kb.png",
       bio: "Guiding the sourcing of high-end developments and investment pipelines."
     },
     {
-      name: "Kushal Bhardwaj",
-      role: "Founder",
-      image: "/kb.png",
+      name: "Arpit Gahlot",
+      role: "Director",
+      image: "/ag.png",
       bio: "Leading design-driven real estate advisory and masterplan curation."
     },
     {
       name: "Rajesh Dahiya",
-      role: "Founder",
-      image: "/outdoor_pool_instagram (1).png",
+      role: "Director",
+      image: "/rd.png",
       bio: "Driving strategic partnerships, investor relations, and capital sourcing."
     },
-    {
-      name: "xyz Sharma",
-      role: "Client Relations Director",
-      image: "/centercourt-upscale.webp",
-      bio: "Ensuring exceptional buyer service and seamless property handovers."
-    },
-
+    
+    
   ];
 
   const partners = [1, 2, 3, 4, 5, 6, 7];
@@ -223,16 +225,16 @@ export default function AboutPage() {
             className="md:col-span-5 relative rounded-[28px] overflow-hidden min-h-[400px] md:min-h-full flex flex-col justify-end p-8 shadow-xl border border-[#0b1114]/5"
           >
             <Image
-              src="/outdoor_pool_instagram (1).png"
-              alt="Luxury property amenity pool"
+              src="/gp.png"
+              alt="Group photo of the leadership team"
               fill
               sizes="(max-width: 768px) 100vw, 40vw"
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0b1114]/90 via-[#0b1114]/40 to-transparent" />
             <div className="relative z-10 text-white">
-              <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#ead39a] block mb-1">Our Leadership</span>
-              <h3 className="text-xl font-serif font-bold mb-4">Arpit, Kushal & Rajesh</h3>
+              <span className="text-[8px] font-extrabold uppercase tracking-widest text-[#ead39a] block mb-1">Our Leadership</span>
+              <h3 className="text-[15px] font-serif font-bold mb-4">R.C. Bhardwaj,Kushal Bhardwaj, Arpit Gahlot & Rajesh Sharma</h3>
               <Link href="/#contact" className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-full inline-flex items-center gap-2 transition-all">
                 Who we are
                 <ArrowRight size={14} />
@@ -255,16 +257,16 @@ export default function AboutPage() {
               <div className="flex items-center gap-4 border-t border-[#0b1114]/10 pt-4">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white bg-stone-300">
                   <Image
-                    src="/ag.png"
-                    alt="Arpit Gahlot"
+                    src="/kb.png"
+                    alt="Kushal Bhardwaj"
                     fill
                     sizes="48px"
                     className="object-cover grayscale"
                   />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm text-[#0b1114]">Arpit Gahlot</h4>
-                  <p className="text-xs text-[#0b1114]/60 font-medium">Founder</p>
+                  <h4 className="font-bold text-sm text-[#0b1114]">Kushal Bhardwaj</h4>
+                  <p className="text-xs text-[#0b1114]/60 font-medium">Director</p>
                 </div>
               </div>
               
@@ -283,19 +285,24 @@ export default function AboutPage() {
               <div className="flex items-center gap-4 border-t border-[#0b1114]/10 pt-4">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white bg-stone-300">
                   <Image
-                    src="/kb.png"
-                    alt="Kushal Bhardwaj"
+                    src="/ag.png"
+                    alt="Arpit Gahlot"
                     fill
                     sizes="48px"
                     className="object-cover grayscale"
                   />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm text-[#0b1114]">Kushal Bhardwaj</h4>
-                  <p className="text-xs text-[#0b1114]/60 font-medium">Founder</p>
+                  <h4 className="font-bold text-sm text-[#0b1114]">Arpit Gahlot</h4>
+                  <p className="text-xs text-[#0b1114]/60 font-medium">Director</p>
                 </div>
               </div>
             </motion.div>
+
+            
+
+
+
           </div>
         </div>
 
