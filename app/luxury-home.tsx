@@ -32,6 +32,7 @@ import {
   X,
   Zap,
 } from "lucide-react";
+import { projects, type Region } from "./data/projects";
 
 const assets = {
   logo: "/ngfooter.png",
@@ -53,59 +54,7 @@ const stats = [
   { value: 5, suffix: "M+", label: "Sq Ft Developed" },
 ];
 
-type Region = "Noida" | "Gurugram";
-
-const projects = [
-  {
-    id: "ivory-county",
-    region: "Noida" as Region,
-    name: "Ivory County",
-    type: "Premium Residential Development",
-    location: "Noida",
-    image: assets.elevation,
-    detail:
-      "Ivory County is positioned as a refined residential address in Noida with premium planning, landscaped community spaces, and a comfortable urban lifestyle.",
-    metric: "Noida",
-    status: "Ongoing / Select Inventory",
-    configuration: "Luxury Apartments",
-    address: "Noida, Uttar Pradesh",
-    highlights: ["Premium residential towers", "Landscaped central greens", "Clubhouse lifestyle", "Secure gated community"],
-    images: [assets.elevation, assets.club, assets.gym, assets.yoga],
-  },
-  {
-    id: "jade-county",
-    region: "Noida" as Region,
-    name: "Jade County",
-    type: "Luxury Residential Community",
-    location: "Noida",
-    image: assets.club,
-    detail:
-      "Jade County brings a clean, amenity-rich residential experience to Noida with well-planned residences, leisure facilities, and strong urban connectivity.",
-    metric: "Noida",
-    status: "Ongoing / Enquire Now",
-    configuration: "Premium Residences",
-    address: "Noida, Uttar Pradesh",
-    highlights: ["Modern residences", "Lifestyle clubhouse", "Fitness and wellness zones", "Family-focused community planning"],
-    images: [assets.club, assets.pool, assets.yoga, assets.elevation],
-  },
-  {
-    id: "central-court",
-    region: "Gurugram" as Region,
-    name: "The Central Court",
-    type: "Flagship Luxury Residential Project",
-    location: "Gurugram",
-    image: assets.tower,
-    detail: "A landmark residential address in Gurugram with high-rise residences, a premium clubhouse, pool deck, wellness zones, and lifestyle amenities.",
-    metric: "Gurugram",
-    status: "Delivered / Ready Lifestyle",
-    configuration: "Luxury High-Rise Residences",
-    address: "The Central Court, Gurugram, Haryana",
-    highlights: ["High-rise residences", "Premium clubhouse", "Pool and wellness deck", "Fitness, yoga, and leisure amenities"],
-    images: [assets.tower, assets.club, assets.pool, assets.gym, assets.yoga, assets.elevation],
-  },
-];
-
-const regions: Region[] = ["Noida", "Gurugram"];
+const regions = Array.from(new Set(projects.map((project) => project.region))) as Region[];
 
 const categories = [
   { title: "Residential", icon: Home, copy: "Signature apartments with crafted amenities and efficient plans." },

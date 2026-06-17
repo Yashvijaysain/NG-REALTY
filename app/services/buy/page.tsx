@@ -5,18 +5,17 @@ import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, ArrowLeft } from "lucide-react";
-import { projects } from "../../data/projects";
+import { projects, type Region } from "../../data/projects";
+
+const regions = Array.from(new Set(projects.map((project) => project.region))) as Region[];
 
 function BuyContent() {
   const searchParams = useSearchParams();
-  const location = (searchParams.get("location") as "Gurugram" | "Noida") || "Noida";
+  const requestedLocation = searchParams.get("location");
+  const location = regions.includes(requestedLocation as Region) ? (requestedLocation as Region) : "Noida";
 
   const filtered = projects.filter((p) => p.region === location);
-
-  const mapSrc =
-    location === "Gurugram"
-      ? "https://maps.google.com/maps?q=Gurugram+Haryana+India&output=embed"
-      : "https://maps.google.com/maps?q=Noida+Uttar+Pradesh+India&output=embed";
+  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(`${location} India`)}&output=embed`;
 
   return (
     <div className="buy-page-wrapper">
