@@ -41,6 +41,7 @@ const assets = {
   club: "/optimized/centercourt-upscale.webp",
   pool: "/optimized/outdoor-pool.webp",
   elevation: "/optimized/apartment-elevation.webp",
+  group: "/gp.png",
   gym: "/optimized/gym.webp",
   yoga: "/optimized/yoga.webp",
 };
@@ -528,7 +529,7 @@ export default function LuxuryHome() {
           </div>
 
           <div className="about-image" data-reveal data-parallax>
-            <Image src={assets.elevation} alt="Premium high-rise development elevation" fill sizes="(max-width: 900px) 100vw, 46vw" />
+            <Image src={assets.group} alt="NEXT GEN REALTY DEVELOPERS team" fill sizes="(max-width: 900px) 100vw, 46vw" />
           </div>
         </section>
 
