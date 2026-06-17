@@ -501,8 +501,7 @@ export default function LuxuryHome() {
               onPlay={() => setShowVideoPlayPrompt(false)}
               onPause={() => setShowVideoPlayPrompt(true)}
             >
-              <source src="/ivory.mp4" type="video/mp4" />
-              <source src="/ivary.mov" type="video/quicktime" />
+              <source src="/lux.mp4" type="video/mp4" />
             </video>
             {showVideoPlayPrompt && (
               <div className="hero-play-overlay">
@@ -750,7 +749,7 @@ export default function LuxuryHome() {
 
       <AnimatePresence>
         {activeProject && (
-          <motion.div className="modal-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setActiveProject(null)}>
+          <motion.div key="project-modal" className="modal-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setActiveProject(null)}>
             <motion.div className="project-modal" initial={{ y: 40, scale: 0.96 }} animate={{ y: 0, scale: 1 }} exit={{ y: 40, scale: 0.96 }} onClick={(event) => event.stopPropagation()}>
               <button className="close" onClick={() => setActiveProject(null)} aria-label="Close project details"><X /></button>
               <div className="property-hero">
@@ -800,7 +799,7 @@ export default function LuxuryHome() {
           </motion.div>
         )}
         {lightbox && (
-          <motion.div className="modal-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setLightbox(null)}>
+          <motion.div key="project-lightbox" className="modal-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setLightbox(null)}>
             <button className="close floating" onClick={() => setLightbox(null)} aria-label="Close image"><X /></button>
             <motion.div className="lightbox" initial={{ scale: 0.96 }} animate={{ scale: 1 }} exit={{ scale: 0.96 }}>
               <Image src={lightbox} alt="Expanded project gallery view" fill sizes="90vw" />
