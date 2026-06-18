@@ -56,6 +56,7 @@ const stats = [
 ];
 
 const regions = Array.from(new Set(projects.map((project) => project.region))) as Region[];
+const serviceLocations: Region[] = ["Gurugram", "Noida", "Ghaziabad", "Greater Noida"];
 
 const categories = [
   { title: "Residential", icon: Home, copy: "Signature apartments with crafted amenities and efficient plans." },
@@ -148,7 +149,7 @@ export default function LuxuryHome() {
   const [serviceModalOpen, setServiceModalOpen] = useState(false);
   const [serviceStep, setServiceStep] = useState<1 | 2>(1);
   const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<Region | null>(null);
 
   const openServiceModal = () => {
     setServiceModalOpen(true);
@@ -389,7 +390,7 @@ export default function LuxuryHome() {
                     </p>
                     <h2 className="modal-title">Choose your location</h2>
                     <div className="location-options">
-                      {["Gurugram", "Noida"].map((loc) => (
+                      {serviceLocations.map((loc) => (
                         <button
                           key={loc}
                           className={`location-option${selectedLocation === loc ? " selected" : ""}`}
@@ -408,10 +409,11 @@ export default function LuxuryHome() {
                         className="modal-submit-btn"
                         disabled={!selectedLocation}
                         onClick={() => {
+                          if (!selectedLocation) return;
                           setServiceModalOpen(false);
                           const svc = (selectedService ?? "").toLowerCase();
                           if (svc === "buy") {
-                            router.push(`/services/buy?location=${selectedLocation}`);
+                            router.push(`/services/buy?location=${encodeURIComponent(selectedLocation)}`);
                           } else {
                             router.push(`/services/${svc}`);
                           }
@@ -496,11 +498,9 @@ export default function LuxuryHome() {
           <div className="about-copy-wrap">
             <div className="section-copy" data-reveal>
               <p className="eyebrow dark">About Us</p>
-              <h2>Brokering premium properties for buyers and investors across Noida and Gurugram.</h2>
+              <h2>Curating Exceptional Residential and Investment Opportunities in Noida and Gurugram's Most Prestigious Addresses</h2>
               <p>
-                NEXT GEN REALTY DEVELOPERS is a trusted brokering company that connects clients to the right properties and helps
-                sellers find the best buyers. We guide clients through property selection, negotiation, and closing for our
-                featured opportunities in Noida and Gurugram.
+                NEXT GEN REALTY DEVELOPERS is dedicated to delivering exceptional real estate experiences across Noida and Gurugram. We specialize in connecting homebuyers and investors with distinguished residential and investment properties while enabling property owners to reach qualified buyers. Through personalized advisory, market expertise, and transparent transactions, we guide our clients through every stage of the real estate journey with confidence and ease.
               </p>
               <div style={{ marginTop: "14px" }}>
                 <Link href="/about" className="button secondary read-more">

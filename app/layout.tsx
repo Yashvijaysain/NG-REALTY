@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "NEXT GEN REALTY DEVELOPERS",
-    description: "Brokering premium properties for buyers and investors across Noida and Gurugram.",
+    description: "Curating Exceptional Residential and Investment Opportunities in Noida and Gurugram's Most Prestigious Addresses",
     images: ["/optimized/centercourt-upscale.webp"],
     type: "website",
   },

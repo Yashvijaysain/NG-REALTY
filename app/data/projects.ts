@@ -6,6 +6,10 @@ export interface Project {
   name: string;
   type: string;
   location: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
   image: string;
   detail: string;
   metric: string;
@@ -35,6 +39,7 @@ export const projects: Project[] = [
     name: "Orange County",
     type: "Premium Residential Community",
     location: "Indirapuram, Ghaziabad",
+    coordinates: { lat: 28.6393065, lng: 77.3605586 },
     image: orangeImage("orange county.avif"),
     detail:
       "Orange County is a well-established premium residential address in Indirapuram, offering strong city connectivity, mature neighborhood infrastructure, landscaped open spaces, and a comfortable community lifestyle for families.",
@@ -60,6 +65,7 @@ export const projects: Project[] = [
     name: "Cherry County",
     type: "Modern Residential Development",
     location: "Tech Zone IV, Greater Noida",
+    coordinates: { lat: 28.592241, lng: 77.451811 },
     image: projectImage("cherry building.webp"),
     detail:
       "Cherry County is placed in the fast-growing Tech Zone IV belt of Greater Noida, combining residential comfort with access to employment hubs, wide sector roads, and planned neighborhood conveniences.",
@@ -86,6 +92,7 @@ export const projects: Project[] = [
     name: "Cleo County",
     type: "Luxury Residential Community",
     location: "Sector 121, Noida",
+    coordinates: { lat: 28.6009331, lng: 77.3997247 },
     image: projectImage("cleo building.jpg"),
     detail:
       "Cleo County is a premium residential community in Sector 121, Noida, known for resort-inspired planning, wellness-led amenities, and a location that connects smoothly to key Noida sectors.",
@@ -113,6 +120,7 @@ export const projects: Project[] = [
     name: "County 107 by County Group",
     type: "Luxury High-Rise Residences",
     location: "Sector 107, Noida",
+    coordinates: { lat: 28.545932, lng: 77.376561 },
     image: projectImage("107 building.jpg"),
     detail:
       "County 107 by County Group is a luxury residential address in Sector 107, Noida, shaped for refined high-rise living with elegant residences, curated amenities, and strong access across the Noida expressway corridor.",
@@ -139,6 +147,7 @@ export const projects: Project[] = [
     name: "Clove County",
     type: "Premium Expressway Residences",
     location: "Sector 151, Noida",
+    coordinates: { lat: 28.4437945, lng: 77.4640799 },
     image: projectImage("clove building.webp"),
     detail:
       "Clove County sits along the Sector 151 expressway belt, offering a quieter residential setting with quick access to emerging infrastructure, green surroundings, and Noida's growth corridor.",
@@ -168,6 +177,7 @@ export const projects: Project[] = [
     name: "Ivory County by County Group",
     type: "Premium Residential Development",
     location: "Sector 115, Noida",
+    coordinates: { lat: 28.556555, lng: 77.405647 },
     image: projectImage("ivory building.webp"),
     detail:
       "Ivory County by County Group is positioned in Sector 115, Noida, with premium residences, landscaped community spaces, and a practical location near Sorkha Village Road for everyday urban convenience.",
@@ -194,6 +204,7 @@ export const projects: Project[] = [
     name: "Jade County by County Group",
     type: "Luxury Residential Community",
     location: "Wave City, Ghaziabad",
+    coordinates: { lat: 28.642772, lng: 77.514378 },
     image: projectImage("jade building.webp"),
     detail:
       "Jade County by County Group brings an amenity-rich residential experience to Wave City, Ghaziabad, with premium homes, family-focused planning, and convenient access from NH-24.",
@@ -222,6 +233,7 @@ export const projects: Project[] = [
     name: "Ivy County by County Group",
     type: "Premium Urban Residences",
     location: "Sector 75, Noida",
+    coordinates: { lat: 28.577354, lng: 77.382685 },
     image: projectImage("ivy building.webp"),
     detail:
       "Ivy County by County Group is located in Sector 75, Noida, offering premium urban residences with metro-side convenience, everyday retail access, and a polished community lifestyle.",
@@ -246,6 +258,7 @@ export const projects: Project[] = [
     name: "Coco County by County Group",
     type: "Contemporary Residential Project",
     location: "Greater Noida West",
+    coordinates: { lat: 28.605466, lng: 77.428063 },
     image: projectImage("coco building.avif"),
     detail:
       "Coco County by County Group is a contemporary residential project in Greater Noida West, planned for comfortable apartment living with good access to Vaidpura, sector roads, and neighborhood conveniences.",
@@ -272,6 +285,7 @@ export const projects: Project[] = [
     name: "Olive County",
     type: "Established Residential Address",
     location: "Vasundhara, Ghaziabad",
+    coordinates: { lat: 28.6590892, lng: 77.3788669 },
     image: projectImage("olive building.jpg"),
     detail:
       "Olive County is an established residential address in Vasundhara, Ghaziabad, offering a settled neighborhood environment, access to daily conveniences, and practical connectivity across the Ghaziabad-Delhi NCR belt.",
@@ -297,6 +311,7 @@ export const projects: Project[] = [
     name: "The Center Court",
     type: "Flagship Luxury Residential Project",
     location: "Gurugram",
+    coordinates: { lat: 28.4646148, lng: 77.0299194 },
     image: "/optimized/skyline-tower.webp",
     detail:
       "A landmark residential address in Gurugram with high-rise residences, a premium clubhouse, pool deck, wellness zones, and lifestyle amenities.",

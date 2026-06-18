@@ -1,25 +1,155 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useEffect, useMemo, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, ArrowLeft } from "lucide-react";
-import { projects, type Region } from "../../data/projects";
+import { projects, type Project, type Region } from "../../data/projects";
+
+declare global {
+  interface Window {
+    L?: any;
+  }
+}
 
 const regions = Array.from(new Set(projects.map((project) => project.region))) as Region[];
+const leafletCssId = "leaflet-css";
+const leafletScriptId = "leaflet-script";
+
+function loadLeaflet() {
+  if (typeof window === "undefined") return Promise.resolve(null);
+  if (window.L) return Promise.resolve(window.L);
+
+  if (!document.getElementById(leafletCssId)) {
+    const link = document.createElement("link");
+    link.id = leafletCssId;
+    link.rel = "stylesheet";
+    link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+    document.head.appendChild(link);
+  }
+
+  return new Promise<any>((resolve, reject) => {
+    const existingScript = document.getElementById(leafletScriptId) as HTMLScriptElement | null;
+    if (existingScript) {
+      existingScript.addEventListener("load", () => resolve(window.L), { once: true });
+      existingScript.addEventListener("error", reject, { once: true });
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.id = leafletScriptId;
+    script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+    script.async = true;
+    script.onload = () => resolve(window.L);
+    script.onerror = reject;
+    document.body.appendChild(script);
+  });
+}
+
+function escapeHtml(value: string) {
+  return value.replace(/[&<>"']/g, (char) => {
+    const entities: Record<string, string> = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    };
+    return entities[char];
+  });
+}
+
+function ProjectLocationMap({ location, projects }: { location: Region; projects: Project[] }) {
+  const mapElementRef = useRef<HTMLDivElement | null>(null);
+  const markerKey = useMemo(() => projects.map((project) => project.id).join("|"), [projects]);
+
+  useEffect(() => {
+    if (!mapElementRef.current || projects.length === 0) return;
+
+    let map: any;
+    let cancelled = false;
+    const center = projects.reduce(
+      (average, project) => ({
+        lat: average.lat + project.coordinates.lat / projects.length,
+        lng: average.lng + project.coordinates.lng / projects.length,
+      }),
+      { lat: 0, lng: 0 },
+    );
+
+    loadLeaflet()
+      .then((L) => {
+        if (!L || cancelled || !mapElementRef.current) return;
+
+        map = L.map(mapElementRef.current, {
+          scrollWheelZoom: false,
+          zoomControl: true,
+        }).setView([center.lat, center.lng], projects.length === 1 ? 13 : 11);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        }).addTo(map);
+
+        const bounds = L.latLngBounds([]);
+        projects.forEach((project, index) => {
+          const position = [project.coordinates.lat, project.coordinates.lng] as [number, number];
+          const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(project.address)}`;
+          const marker = L.marker(position, {
+            title: project.name,
+            icon: L.divIcon({
+              className: "project-map-marker",
+              html: `<span>${index + 1}</span>`,
+              iconSize: [34, 34],
+              iconAnchor: [17, 34],
+              popupAnchor: [0, -34],
+            }),
+          }).addTo(map);
+
+          marker.bindPopup(`
+            <strong>${escapeHtml(project.name)}</strong>
+            <small>${escapeHtml(project.address)}</small>
+            <a href="${googleMapsUrl}" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+          `);
+          bounds.extend(position);
+        });
+
+        if (projects.length > 1) {
+          map.fitBounds(bounds, { padding: [34, 34], maxZoom: 13 });
+        }
+      })
+      .catch(() => {
+        if (mapElementRef.current) {
+          mapElementRef.current.dataset.mapError = "true";
+        }
+      });
+
+    return () => {
+      cancelled = true;
+      map?.remove();
+    };
+  }, [location, markerKey, projects]);
+
+  return (
+    <div className="project-map">
+      <div ref={mapElementRef} className="project-map-canvas" aria-label={`${location} project map`} />
+      <div className="project-map-fallback">
+        <MapPin size={18} />
+        Loading project locations...
+      </div>
+    </div>
+  );
+}
 
 function BuyContent() {
   const searchParams = useSearchParams();
   const requestedLocation = searchParams.get("location");
   const location = regions.includes(requestedLocation as Region) ? (requestedLocation as Region) : "Noida";
 
-  const filtered = projects.filter((p) => p.region === location);
-  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(`${location} India`)}&output=embed`;
+  const filtered = projects.filter((project) => project.region === location);
 
   return (
     <div className="buy-page-wrapper">
-      {/* Header bar */}
       <div className="buy-page-header">
         <Link href="/" className="buy-back-btn">
           <ArrowLeft size={18} /> Home
@@ -35,9 +165,7 @@ function BuyContent() {
         </div>
       </div>
 
-      {/* Split layout */}
       <div className="buy-layout">
-        {/* Left — property cards */}
         <div className="buy-prop-list">
           {filtered.length === 0 ? (
             <p style={{ padding: "24px", color: "var(--muted)" }}>
@@ -72,14 +200,8 @@ function BuyContent() {
           )}
         </div>
 
-        {/* Right — sticky map */}
         <div className="buy-map-panel">
-          <iframe
-            src={mapSrc}
-            title={`Map of ${location}`}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          <ProjectLocationMap location={location} projects={filtered} />
         </div>
       </div>
     </div>
@@ -100,7 +222,7 @@ export default function BuyPage() {
             color: "var(--muted)",
           }}
         >
-          Loading properties…
+          Loading properties...
         </div>
       }
     >
